@@ -10,7 +10,7 @@ export default function MainNav() {
       <Link href= "/" className="flex items-center gap-2">
       <Logo className="h-8 w-8 border border-red-500" />
       
-  <span className="text-primary text-xl font-bold">cincscope</span>
+     <span className="text-primary text-xl font-bold">cincscope</span>
       <Badge className="h-8 w-5
        border border-amber-500" />
       <span className="text-primary text-xl font-bold">new Badge</span>
