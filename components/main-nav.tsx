@@ -21,6 +21,7 @@ export default function MainNav() {
     <Link href="/genres">genres</Link>
     <Link href="/movies">about</Link>
     <Link href="/movies">admin</Link>
+     
       <ModeToggle />
       </nav>
       

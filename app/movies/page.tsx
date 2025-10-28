@@ -10,8 +10,7 @@ export default function MoviesPage() {
           <Link href="/" className= "text-white bg-black"> back home page</Link>
         </main>
              
-    
-   </div>
+    </div>
    </div>
   );
 }

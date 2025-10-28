@@ -1,4 +1,5 @@
-
+// import MainNav from "@/components/main-nav";
+// import Link from "next/link";
 export default function GenresPage() {
    return (        
   
@@ -8,7 +9,7 @@ export default function GenresPage() {
     <div className="flex gap-4">
     <div className="w-40 h-40 border-primary border text-xs text-center">border primary</div>
     <div className="w-40 h-40 bg-primary text-xs text-center">background primary</div>
-     <div className="w-40 h-40 outline-3 outline-primary text-xs text-center">boutline</div>
+     <div className="w-40 h-40 outline-3 outline-primary text-xs text-center">outline</div>
   
       <div className="w-40 h-40  relative border border-primary"> 
         <h1 className="text-primary font-bold text-lg  text-center">Rgb seco</h1>
@@ -17,20 +18,19 @@ export default function GenresPage() {
       </div>
       <div className="w-40 h-40 relative bg-accent text-xs text-center"> name color</div>           
        
+      </div>    
+{/* 
+  <div className="text-center min-h-screen">
+      <MainNav />
+      <main className="flex flex-col justify-center items-center gap-4 bg-purple-400 text-2xl py-60">
+                <Link href="/" className="text-white bg-black px-4 py-2 rounded">Back Home Page </Link>
+      </main>
+      </div> */}
+ </div> 
+              )
+} 
      
-    </div>
-    </div> 
-       
-      
-)
-}
 
- //  <div className="text-center min-h-screen">
-    //   <MainNav />
-    //   <main className="flex flex-col justify-center items-center gap-4 bg-purple-400 text-2xl py-60">
-    //             <Link href="/" className="text-white bg-black px-4 py-2 rounded">Back Home Page </Link>
-    //   </main>
-  
 //     return (
 //  <div className="flex min-h-screen items-center justify-center bg-amber-200 p-6 ">
 
