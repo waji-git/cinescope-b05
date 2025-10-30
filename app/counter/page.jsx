@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Profile from "./profile";
 
 export default function Counter() {
@@ -17,7 +17,22 @@ export default function Counter() {
     setAge(28);
     setName("taylor");
     setTodos(["practice swiming,go to school"]);
+    console.log("data :", { age, name, todos });
   }
+
+  useEffect(() => {
+    console.log("use effect Tiggered");
+  });
+  
+  //usage only runs on initial
+  useEffect(() => {
+    console.log("use effect Tiggered 2");
+  }, []);
+
+  //usage components props update
+  useEffect(() => {
+    console.log("use effect Tiggered 3", [age, name, todos]);
+  }, [age, name, todos]);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen gap-2">
