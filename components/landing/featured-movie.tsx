@@ -18,7 +18,7 @@ FeaturedMovie
        <Button variant={'outline'}>  view all</Button>
         {/* <Button variant =""> view all</Button> */}
         </div>
-        <div className='w-full h-[122px] bg-purple-400 rounded-lg mb-6'></div>
+        
         <MoviesList />
         
        
