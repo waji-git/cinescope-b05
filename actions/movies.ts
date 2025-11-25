@@ -34,5 +34,3 @@ export const getMovies = async () => {
   }
 };
 
-// const data = await moviesResponse.json();
-//     return data || [];
