@@ -1,6 +1,12 @@
+
+"use client";
+
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { loginUser } from "@/actions/auth";
 
 import {
   Card,
@@ -14,6 +20,7 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
+  FieldError,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -21,6 +28,24 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
+  const [state, formAction, isPending] = useActionState(loginUser, {
+    success: null,
+    message: null,
+    Field: null,
+  });
+
+  useEffect(() => {
+    if (state) {
+      if (state.success) {
+        router.push("/dashboard");
+        //console.log("login successful:", state.message);
+      } else {
+        // console.log("login failed:", state.message);
+      }
+    }
+  }, [router, state]);
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -31,17 +56,22 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={formAction}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
-                  placeholder="m@example.com"
-                  required
+                  placeholder="john.doe@email.com"
+                  // required
                 />
+                <FieldError className="text-xs text-center">
+                  {state?.field === "email" ? state?.message : null}
+                </FieldError>
               </Field>
+
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -52,10 +82,18 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" />
+                <FieldError className="text-xs ">
+                  {state?.field === "password" ? state?.message : null}
+                </FieldError>
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <FieldError className="text-xs text-center">
+                  {state?.field === "general" ? state?.message : null}
+                </FieldError>
+                <Button type="submit" disabled={isPending}>
+                  Login
+                </Button>
                 <Button variant="outline" type="button">
                   Login with Google
                 </Button>

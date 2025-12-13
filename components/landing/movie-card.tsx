@@ -42,7 +42,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       <CardContent className="p-4">
         <h3 className="line-clamp-1 font-semibold">{movie.title}</h3>
         <p className="text-muted-foreground text sm">
-          {movie.year} * {movie.runtime} min
+          {movie.year} - {movie.runtime} min
         </p>
         <div className="mt-2 flex flex-wrap gap-1">
           {movie.genres.slice(0, 2).map((genre, index) => (

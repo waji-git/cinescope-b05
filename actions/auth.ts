@@ -1,84 +1,134 @@
-// "use server";
-//  import { signUp } from "@/lib/auth-client";
-
-// export const registerUser = async (currentState, formData)=> {
-// if(formData){
-//     const name = formData.get("name");
-// const email = formData.get("email");
-// const password = formData.get("password");
-
-// console.log("registering user with:",{name,email,password})
-// try {
-//   const { data, error } = await signUp.email(
-//     {
-//       email,
-//       password,
-//       name,
-//       image: null,
-//       callbackURL: "/dashboard",
-//     },
-//     {
-//       onSuccess: (ctx) => {
-//         console.log("Registration successful:", ctx);
-//       },
-//       onError: (ctx) => {
-//         console.log("Registration error:", ctx.error);
-//       },
-//     }
-//   );
-
-//   if (error) {
-//     throw error;
-//   }
-
-//   return data;
-// } catch (err) {
-//   console.error("Error registering user:", err);
-//   // throw err;
-// }
-
-// }
-  
-// };
-
 "use server";
 
 import { signUp } from "@/lib/auth-client";
 
-export const registerUser = async (currentState: _ , formData: FormData) => {
-  try {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+import { auth } from "@/lib/auth";
 
-    console.log("Registering user with:", { name, email, password });
+export const registerUser = async (_: any, formData: { get: (arg0: string) => any; }) => {
+  if (formData) {
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const { data, error } = await signUp.email(
-      {
-        email,
-        password,
-        name,
-        image: null,
-        callbackURL: "/dashboard",
-      },
-      {
-        onSuccess: (ctx) => {
-          console.log("Registration successful:", ctx);
-        },
-        onError: (ctx) => {
-          console.log("Registration error:", ctx.error);
-        },
-      }
-    );
-
-    if (error) {
-      console.error("SignUp error:", error);
-      return { error: error.message || "Registration failed" };
+    if (!name) {
+      return { success: false, message: "Name is required.", field: "name" };
     }
 
-    return { success: true, data };
-  } catch (err) {
-    console.error("Error registering user:", err);
-    return { error: "Something went wrong" };
+    if (!email) {
+      return { success: false, message: "Email is required.", field: "email" };
+    }
+
+    if (!password) {
+      return {
+        success: false,
+        message: "Password is required.",
+        field: "password",
+      };
+    }
+
+    try {
+      const { error } = await signUp.email(
+        {
+          email,
+          password,
+          name,
+          image: null,
+
+          callbackURL: "/dashboard",
+        },
+
+        {
+          onError: (ctx) => {
+            console.error("Registration error:", ctx.error);
+          },
+        }
+      );
+
+      const response = await auth.api.signUpEmail({
+        body: { email, password, name, image: null },
+      });
+
+      console.log("Registration response:", response);
+
+      return {
+        // success: !error,
+        // message: error ? error.message : "Registration successful.",
+
+        success: true,
+
+        message: "User registered successfully.",
+
+        field: "general",
+      };
+    } catch (error) {
+      console.error("Error registering user:", error);
+
+      // console.error("Error registering user:", error.message);
+
+      // return { success: false, message: "Registration failed." };
+
+      return {
+        success: false,
+        message: "User registration failed.",
+        field: "general",
+      };
+    }
+  }
+};
+
+// Server action to log in a user
+
+export const loginUser = async (_: any, formData: { get: (arg0: string) => any; }) => {
+  if (formData) {
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    if (!email) {
+      return { success: false, message: "Email is required.", field: "email" };
+    }
+
+    if (!password) {
+      return {
+        success: false,
+        message: "Password is required.",
+        field: "password",
+      };
+    }
+
+    try {
+      const response = await auth.api.signInEmail({
+        body: { email, password, rememberMe: true },
+      });
+
+      console.log("Login response:", response);
+
+      return {
+        success: true,
+        message: "User logged in successfully.",
+        field: "general",
+      };
+    } catch (error) {
+      console.error("Error logging in user:", error.message);
+
+      return {
+        success: false,
+        message: error.message || "Login failed.",
+        field: "general",
+      };
+    }
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const response = await auth.api.signOut();
+
+    console.log("Logout response:", response);
+
+    return { success: true, message: "User logged out successfully." };
+  } catch (error) {
+    console.error("Error logging out user:", error);
+
+    return { success: false, message: "Logout failed." };
   }
 };

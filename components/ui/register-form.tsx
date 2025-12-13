@@ -1,8 +1,10 @@
+
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { registerUser } from "@/actions/auth";
 import {
@@ -17,23 +19,31 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
+
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-
+import { string, success } from "better-auth";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-
-const [state, formAction, isPending] = useActionState(registerUser, null);
-// const handleSignUp = async (formData: FormData) =>{
-  
-//   "use server";
-// const name = FormData.get("name") as string;
-// const email = FormData.get("email") as string;
-// const password = FormData.get("password") as string;
-// };
+  const router = useRouter();
+const [state, formAction, isPending] = useActionState(registerUser, {
+   success: null,
+   message: null,
+   field:null,
+});
+useEffect(() => {
+  if (state) {
+    if (state.success) {
+      router.push("/dashboard");
+      //console.log("login successful:", state.message);
+    } else {
+      // console.log("login failed:", state.message);
+    }
+  }
+}, [router, state]);
 
 console.log("Registration state:", state,"isPending:", isPending);
 
@@ -41,7 +51,9 @@ console.log("Registration state:", state,"isPending:", isPending);
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg capitalize">Create an account</CardTitle>
+          <CardTitle className="text-lg capitalize">
+            Create an account
+          </CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
@@ -50,10 +62,10 @@ console.log("Registration state:", state,"isPending:", isPending);
           <form action={formAction}>
             <FieldGroup className="gap-4">
               <Field>
-                <FieldLabel htmlFor="name" >Name</FieldLabel>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
                 <Input
-                  id="name" 
-                  name ="name"
+                  id="name"
+                  name="name"
                   type="text"
                   placeholder="John doe"
                   required
@@ -71,12 +83,26 @@ console.log("Registration state:", state,"isPending:", isPending);
               </Field>
               <Field>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-               
+
                 <Input id="password" name="password" type="password" required />
+                
               </Field>
+
               <Field>
-                <Button type="submit" className="cursor-pointer" disabled={isPending}>Register</Button>
-                <Button variant="outline" type="button" disabled>
+              
+                <Button
+                  type="submit"
+                  className="cursor-pointer"
+                  disabled={isPending}
+                >
+                  Register
+                </Button>
+                <Button
+                  variant="outline"
+                  type="button"
+                  className="cursor-pointer"
+                  disabled
+                >
                   Continue with Google
                 </Button>
                 <FieldDescription className="text-center">
