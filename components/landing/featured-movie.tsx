@@ -1,6 +1,7 @@
-import React from "react";
-import { Button } from "../ui/button";
-import MoviesList from "./movies-list";
+import React, { Suspense } from "react";
+// import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import MoviesList, { MoviesListSkelton } from "./movies-list";
 
 export default function FeaturedMovie() {
   return (
@@ -19,8 +20,13 @@ export default function FeaturedMovie() {
         <Button variant={"outline"}> view all</Button>
         {/* <Button variant =""> view all</Button> */}
       </div>
+      <div className="space-y-6">
+        <div className="w-full h-[122px] bg-purple-400 rounded-lg "></div>
 
-      <MoviesList />
+        <Suspense fallback={<MoviesListSkelton />}>
+          <MoviesList />
+        </Suspense>
+      </div>
     </section>
   );
 }

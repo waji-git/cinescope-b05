@@ -39,7 +39,7 @@ export default function MainNav() {
             about
           </Link>
           <Link
-            href="/admin"
+            href="/dashboard"
             className="hover:text-primary text-sm font-medium transition-colors"
           >
             admin

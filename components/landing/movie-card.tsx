@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 // import { Ghost } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 type MovieCardProps = {
   movie: {
@@ -77,3 +78,32 @@ export default function MovieCard({ movie }: MovieCardProps) {
     </Card>
   );
 }
+
+export function MoviesCardSkelton(){
+return(
+<div className="overflow-hidden rounded-lg">
+<Skeleton className="aspect-2/3 w-full" />
+<div className="p-4">
+<div className="space-y-2">
+  <Skeleton className="h-4 w-3/4" />
+  <Skeleton className=" h-4 w-1/2" />
+  </div>
+
+<div className="flex-mt-gap-1">
+  <Skeleton className="h-5 w-1/5" />
+  <Skeleton className=" h-5 w-1/5" />
+  </div>
+
+<div className="flex-justify-between gap-2 mt-6">
+  <Skeleton className="h-6 w-16 rounded-full" />
+  <Skeleton className=" h-6 w-16 rounded-full" />
+  </div>
+</div>
+</div>
+
+);
+}
+
+
+
+
