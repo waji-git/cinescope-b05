@@ -17,10 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Logo } from '@/components/shared/logo';
 import { ModeToggle } from '@/components/mode-toggle';
- import { Item } from '@radix-ui/react-dropdown-menu';
-
-
-
+//  import { Item } from '@radix-ui/react-dropdown-menu';
 
 const menuItems = [
   { title: "dashboard", href: "/dashboard", Icon: HomeIcon, exact: true },
@@ -48,8 +45,7 @@ if(Item.href==="/"){
 }
 return pathname.startsWith(Item.href);
   };
-    
-  
+      
   return (
     <Sidebar
       collapsible="icon"

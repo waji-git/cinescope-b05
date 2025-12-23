@@ -7,7 +7,7 @@ export default  async function MoviesData() {
     if(movies){
         console.log(movies);
     }
-        return <div>Movie Data</div>;
+         return <div className="mt-4 font-bold">Movies Data</div>;
     }catch(error)
     { console.log(error);
         

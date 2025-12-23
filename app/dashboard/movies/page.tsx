@@ -3,6 +3,7 @@ import { PlusIcon } from 'lucide-react';
 import React from 'react'
 import MovieSelectors from './movie-selectors';
 import MoviesData from './movies-data';
+import Moviestable from './movies-table';
 
 export default function MoviesDashboardPage() {
   return (
@@ -18,7 +19,8 @@ export default function MoviesDashboardPage() {
         </Button>
       </div>
       <MovieSelectors />
-      <MoviesData />
+      <MoviesData  />
+      <Moviestable/>
     </div>
   );
 }
