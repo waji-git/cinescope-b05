@@ -1,13 +1,15 @@
 import { getMovies } from "@/actions/movies";
-
 import React from 'react'
+import { MovieTable } from "./movie-table";
+import { title } from "process";
 
-export default  async function MoviesData() {
+
+export default  async function MovieData() {
    try {const movies = await getMovies();
     if(movies){
         console.log(movies);
     }
-         return <div className="mt-4 font-bold">Movies Data</div>;
+         return <MovieTable movies ={movies} />;
     }catch(error)
     { console.log(error);
         

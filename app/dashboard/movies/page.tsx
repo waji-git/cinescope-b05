@@ -1,9 +1,10 @@
-import { Button } from '@/components/ui/button';
-import { PlusIcon } from 'lucide-react';
+// import { Button } from '@/components/ui/button';
+// import { PlusIcon } from 'lucide-react';
 import React from 'react'
 import MovieSelectors from './movie-selectors';
-import MoviesData from './movies-data';
-import Moviestable from './movies-table';
+import MovieData from './movie-data';
+import AddMovieDiolog from '@/components/dashboard/add-movie-diolog';
+
 
 export default function MoviesDashboardPage() {
   return (
@@ -13,15 +14,12 @@ export default function MoviesDashboardPage() {
           <h2 className="text-3xl font-bold tracking-tight"> Movie</h2>
           <p className="text-muted-foreground"> Manage your movies catlog</p>
         </div>
-        <Button>
-          <PlusIcon className="mr-2 h-4 w-4"></PlusIcon>
-          Add Movie
-        </Button>
+        <AddMovieDiolog />
       </div>
+
       <MovieSelectors />
-      <MoviesData  />
-      <Moviestable/>
-    </div>
+      <MovieData />
+       </div>
   );
 }
 

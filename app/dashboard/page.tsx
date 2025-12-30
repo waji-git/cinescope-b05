@@ -38,14 +38,3 @@ export default async function DashboardPage() {
   );
 }
 
-// import React from 'react'
-
-// export default function DashboardPage() {
-//   return (
-//     <div className="text-center py-12">
-//       welcome to the dash board
-//     </div>
-//   )
-// }
-
-
