@@ -1,8 +1,10 @@
 import React from 'react'
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
+import { MovieThumbnail } from "./movie-thumbnail";
+import type { WithId, Document } from "mongodb";
+import { Key } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -21,12 +23,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Key } from 'lucide-react';
+
 import type { Movie } from "./type";
+import { title } from 'process';
 
 
 type MovieTableProps = {
-  movies: Array<Movie>;
+  movies: WithId<Document>[];
 };
 export  function MovieTable({ movies }: MovieTableProps) {
    console.log(movies[0].genres);
@@ -52,12 +55,9 @@ export  function MovieTable({ movies }: MovieTableProps) {
               <TableCell className="font-medium">{key + 1}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  <Image
-                    src={movie.poster ?? "/turtle-svgrepo-com.svg"}
-                    alt={movie.title}
-                    width={28}
-                    height={40}
-                    className="rounded-md"
+                  <MovieThumbnail
+                    poster={movie.poster ?? "/images/no-poster.png"}
+                    title={movie.title}
                   />
                   <span className="font-medium max-w-60 text-wrap line-clamp-2">
                     {movie.title}
@@ -90,23 +90,22 @@ export  function MovieTable({ movies }: MovieTableProps) {
               </TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
-                  <DropdownMenuTrigger>
+                  <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
                       <span className="sr-only">Open menu</span>
                       <MoreHorizontalIcon className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
 
-                     <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Movie Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>View Details</DropdownMenuItem>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive">
-                        Delete
-                      </DropdownMenuItem>
-                
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Movie Actions</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>View Details</DropdownMenuItem>
+                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="text-destructive">
+                      Delete
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
