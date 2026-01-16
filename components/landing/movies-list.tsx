@@ -3,22 +3,12 @@ import { getMovies } from "@/actions/movies";
 import MovieCard, { MoviesCardSkelton } from "./movie-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// import { promise } from "better-auth";
-// import { setTimeout } from "timers/promises";
-
 
  export default async function MoviesList() {
  await new Promise((resolve) => setTimeout(resolve, 5000));
    const movies = await getMovies();
      console.log("feched movie:", movies);
 
-//     if(!movies || movies.length===0){
-// return(
-//   <div className="text-red-600 text-center py-12"> no movie found</div>
-
-// );
-
-//     }
 return (
   <>
     <div className="text-muted-foreground text-sm">
@@ -33,14 +23,6 @@ return (
   </>
 );
 }
-
-// export function MoviesListSkelton() {
-//   return (
-//     <div className="grid grid-cols-1 gap-6 sm:grid-col-2 lg:grid-cols-3 xl:grid-cols-4">
-//       {Array(8).fill(0).map((_,i) => ())}
-//     </div>
-//   );
-// }
 
 export function MoviesListSkelton() {
   return (

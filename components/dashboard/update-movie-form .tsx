@@ -2,6 +2,7 @@
 "use client";
  import { useState } from "react";
    import { useRouter } from "next/navigation";
+    import { Movie } from "@/lib/type";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,30 +17,66 @@ import {
  import { DialogFooter } from "@/components/ui/dialog";
  import { getAllGenres, getAllStatuses, getAllYears } from "@/lib/utils";
  import { Button } from "@/components/ui/button";
-  import { createMovie } from "@/actions/movies";
-
-//  import { movie } from "@/lib/type";
-
+  import { updateMovie } from "@/actions/movies";
+import type { WithId, Document } from "mongodb";
+import { Value } from "@radix-ui/react-select";
+ 
 
 type AddMovieFormProps ={
  showDialog: (value: boolean)=> void;
+ movie?: WithId<Document>;
 };
 
-
- export default function AddMovieForm({ showDialog }: AddMovieFormProps) {
-   const router = useRouter();
+ 
+ //  export default function UpdateMovieForm({ showDialog }: AddMovieFormProps) {
+export default function UpdateMovieForm({
+  showDialog,
+  movie,
+}: AddMovieFormProps) {
+  const router = useRouter();
    const [isSubmitting, setIsSubmitting] = useState(false);
+   const [formState, setFormState] = useState({
+    //  _id:movie?._id.toString() || "", 
+    title: movie?.title || "",
+     year: movie?.year || "",
+     rating: movie?.imdb?.rating || "",
+     genres: movie?.genres?. at(0)|| "",
+     poster: movie?.poster || "",
+     backdrop: movie?.backdrop || "",
+     runtime: movie?.runtime || "",
+     status: movie?.status || "",
+     directors: movie?.directors?.at(0) || "",
+     overview: movie?.plot|| "",
+   });
+
+
+
+   
    const years = getAllYears();
    const genres = getAllGenres();
    const statuses = getAllStatuses();
 
-   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+ 
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  const { name, value } = e.target;
+  setFormState((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+   const handleSubmit = async (
+     event: React.FormEvent<HTMLFormElement> 
+   ) => {
      event.preventDefault();
      const formData = new FormData(event.currentTarget);
      //  const data = Object.fromEntries(formData.entries());
      // console.log(data);
 
-     const movie = {
+     const movieDoc= {
+      
        title: formData.get("title"),
        year: formData.get("year"),
        directors: [formData.get("director")],
@@ -53,10 +90,15 @@ type AddMovieFormProps ={
        lastUpdated: new Date().toISOString(),
      };
 
-      setIsSubmitting(true);
+
+
+
+     setIsSubmitting(true);
 
      try {
-       const response = await createMovie(movie);
+   
+      const response = await updateMovie(movie.id,movieDoc);
+     
 
        if (response.success) {
          router.refresh();
@@ -64,11 +106,9 @@ type AddMovieFormProps ={
          showDialog(false);
        }
      } catch {
-        console.log("erorr vreating movie");
-     }
-     finally{
-setIsSubmitting(false);
-
+       console.log("erorr vreating movie");
+     } finally {
+       setIsSubmitting(false);
      }
    };
 
@@ -84,14 +124,24 @@ setIsSubmitting(false);
              name="title"
              type="text"
              placeholder="Movie title"
+             value={formState.title}
+             onChange={handleChange}
              required
            />
+          
          </div>
          <div className="space-y-2">
            <Label htmlFor="year">
              Year<span className="text-red-500">*</span>
            </Label>
-           <Select name="year" required>
+           <Select
+             name="year"
+             required
+             onValueChange={(Value) =>
+               setFormState((prev) => ({ ...prev, year: Value }))
+             }
+             value={formState.year}
+           >
              <SelectTrigger className="w-full">
                <SelectValue placeholder="Please select year" />
              </SelectTrigger>
@@ -112,6 +162,9 @@ setIsSubmitting(false);
              name="director"
              type="text"
              placeholder="Director"
+             value={formState.directors}
+             onChange={handleChange}
+             required
            />
          </div>
 
@@ -119,7 +172,14 @@ setIsSubmitting(false);
            <Label htmlFor="genre">
              Genre<span className="text-red-500">*</span>
            </Label>
-           <Select name="genre" required>
+           <Select
+             name="genre"
+             required
+             value={formState.genres}
+             onValueChange={(Value) =>
+               setFormState((prev) => ({ ...prev, genres: Value }))
+             }
+           >
              <SelectTrigger className="w-full">
                <SelectValue placeholder="Please select genre" />
              </SelectTrigger>
@@ -147,6 +207,8 @@ setIsSubmitting(false);
              min="0"
              max="10"
              step="0.1"
+             value={formState.rating}
+             onChange={handleChange}
              required
            />
          </div>
@@ -162,6 +224,8 @@ setIsSubmitting(false);
              max="1000"
              min="0"
              step="1"
+             value={formState.runtime}
+             onChange={handleChange}
              required
            />
          </div>
@@ -172,6 +236,9 @@ setIsSubmitting(false);
              name="overview"
              placeholder="Movie description"
              className="h-[6.25rem]"
+             value={formState.overview}
+             onChange={handleChange}
+             required
            />
          </div>
        </div>
@@ -186,6 +253,8 @@ setIsSubmitting(false);
              name="poster"
              type="url"
              placeholder="URL to movie poster image"
+             value={formState.poster}
+             onChange={handleChange}
              required
            />
          </div>
@@ -198,6 +267,8 @@ setIsSubmitting(false);
              name="backdrop"
              type="url"
              placeholder="URL to movie backdrop image"
+             value={formState.backdrop}
+             onChange={handleChange}
              required
            />
          </div>
@@ -205,7 +276,14 @@ setIsSubmitting(false);
            <Label htmlFor="status">
              Status<span className="text-red-500">*</span>
            </Label>
-           <Select name="status" required>
+           <Select
+             name="status"
+             required
+             onValueChange={(Value) =>
+               setFormState((prev) => ({ ...prev, status: Value }))
+             }
+             value={formState.status}
+           >
              <SelectTrigger className="w-full capitalize">
                <SelectValue placeholder="Please select status" />
              </SelectTrigger>
@@ -234,10 +312,12 @@ setIsSubmitting(false);
          >
            Cancel
          </Button>
-         <Button type="submit" className="min-w-[6.375rem]"
-       
-           disabled={isSubmitting}>
-         {isSubmitting ? "Adding...": "Add movie"} 
+         <Button
+           type="submit"
+           className="min-w-[6.375rem]"
+           disabled={isSubmitting}
+         >
+           {isSubmitting ? "updating..." : "update movie"}
          </Button>
        </DialogFooter>
      </form>

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
   return (
-   <Button variant="ghost" size="icon" className="h-9 w-9"><SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100"></SunIcon>
+   <Button variant="ghost" size="icon" className="h-9 w-9">
+    <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100"></SunIcon>
    </Button>
   );
 }
