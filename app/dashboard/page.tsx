@@ -22,7 +22,6 @@ export default async function DashboardPage() {
     redirect("/login");
   };
 
-  // console.log("User session:", session);
 
   return (
     <main className="flex flex-col justify-center items-center">

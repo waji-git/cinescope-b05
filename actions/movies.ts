@@ -5,7 +5,7 @@ import { MovieCreate} from "@/lib/type";
 import { ObjectId } from "mongodb";
 
 
-// Get a list of movies from the database
+
 export async function getMovies() {
   try {
     const moviesResponse = await fetch(
@@ -117,6 +117,34 @@ export async function updateMovie(id:string, movie: MovieCreate) {
     return {
       success: false,
       message: "An error occurred while creating the movie.",
+    };
+  }
+}
+
+export async function deleteMovie(id: string) {
+  try {
+    const result = await db
+      .collection("movies_new")
+      .deleteOne (
+        { _id: ObjectId.createFromHexString(id) });
+       
+
+    if(result.acknowledged) {
+      return {
+        success: true,
+        message: "Movie deletesuccessfully.",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to deletemovie.",
+      };
+    }
+  } catch (error) {
+    console.log("MongoDBdelete error:", error);
+    return {
+      success: false,
+      message: "An error occurred while delete the movie.",
     };
   }
 }

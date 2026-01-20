@@ -20,7 +20,7 @@ import {
   import { updateMovie } from "@/actions/movies";
 import type { WithId, Document } from "mongodb";
 import { Value } from "@radix-ui/react-select";
- 
+
 
 type AddMovieFormProps ={
  showDialog: (value: boolean)=> void;
