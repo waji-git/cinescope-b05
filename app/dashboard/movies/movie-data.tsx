@@ -1,7 +1,7 @@
 
 import { searchMovies } from "@/actions/movies";
 import { MovieTable } from "./movie-table";
-// import { Movie } from "./type";
+
 
 type MovieDataProps ={
   query?:string;
@@ -10,12 +10,12 @@ type MovieDataProps ={
 
 export default async function MovieData({query=""} : MovieDataProps) {
   try {
-    // Fetch movies data from the server
+
     const { data, success } = await searchMovies(query);
 
     if (!success) throw new Error("No movies found in the database.");
 
-    // console.log("Movies fetched:", data);
+
 
     const refinedData = data.map((movie) => ({
       id: movie._id.toString(),
