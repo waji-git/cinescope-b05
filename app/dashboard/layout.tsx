@@ -1,7 +1,7 @@
 import AdminHeader from '@/components/dashboard/admin-header';
 import AdminSidebar from '@/components/dashboard/admin-sidebar'
 import React from 'react'
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider,  } from "@/components/ui/sidebar";
 
 export default function DashBoardLayout({
   children,

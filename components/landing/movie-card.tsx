@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-// import { Ghost } from "lucide-react";
+
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";

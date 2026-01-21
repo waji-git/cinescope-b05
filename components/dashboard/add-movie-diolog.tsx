@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import UpdateMovieForm from "./update-movie-form " ;
+
 import AddMovieForm from "./add-movie-form";
 
 

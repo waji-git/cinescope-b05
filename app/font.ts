@@ -1,6 +1,5 @@
 import {Inter, Roboto_Mono } from "next/font/google";
 
-import React from 'react'
 
 export const inter = Inter ({
  subsets:["latin"],

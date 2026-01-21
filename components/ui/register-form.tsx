@@ -22,7 +22,6 @@ import {
 
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { string, success } from "better-auth";
 
 export function RegisterForm({
   className,
@@ -30,10 +29,17 @@ export function RegisterForm({
 }: React.ComponentProps<"div">) {
   const router = useRouter();
 const [state, formAction, isPending] = useActionState(registerUser, {
-   success: null,
-   message: null,
-   field:null,
+  //  success: null,
+  //  message: null,
+  //  field:null,
+
+
+  success: false,
+  message: "",
+  field: undefined,
 });
+
+
 useEffect(() => {
   if (state) {
     if (state.success) {
