@@ -30,11 +30,16 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const router = useRouter();
-  const [state, formAction, isPending] = useActionState(loginUser, {
-    success: null,
-    message: null,
-    Field: null,
-  });
+  // const [state, formAction, isPending] = useActionState(loginUser, {
+  //   success: null,
+  //   message: null,
+  //   field: null,
+  // });
+const [state, formAction, isPending] = useActionState(loginUser, {
+  success: false,
+  message: "",
+  field: undefined,
+});
 
   useEffect(() => {
     if (state) {
