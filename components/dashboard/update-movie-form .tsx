@@ -24,6 +24,7 @@ type AddMovieFormProps = {
   movie?: WithId<Document>;
 };
 
+
 export default function UpdateMovieForm({
   showDialog,
   movie,
@@ -45,6 +46,8 @@ export default function UpdateMovieForm({
     overview: movie?.plot || "",
   });
 
+
+ 
   const years = getAllYears();
   const genres = getAllGenres();
   const statuses = getAllStatuses();
@@ -61,7 +64,7 @@ export default function UpdateMovieForm({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    // const formData = new FormData(event.currentTarget);
     // const movieDoc = {
     //   title: formData.get("title"),
     //   year: formData.get("year"),
@@ -96,10 +99,6 @@ export default function UpdateMovieForm({
       // // updateMovie(movie.id, movieDoc);
       // // 
       // //  const handleSubmit = async (e: React.FormEvent) => {
-
-
-
-
 
       if (response.success) {
         router.refresh();
