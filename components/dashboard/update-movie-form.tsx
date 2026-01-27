@@ -71,11 +71,11 @@ export default function UpdateMovieForm({
 
     const movieDoc = {
       title: formState.title,
-      year: formState.year,
-      directors: [formState.director], // Updated here
+      year: formState.year.toString(), // Ensure it's a string
+      directors: [formState.director],
       genres: [formState.genres],
       imdb: { rating: Number(formState.rating) },
-      runtime: Number(formState.runtime),
+      runtime: Number(formState.runtime), // Or .toString() if your action requires it
       plot: formState.overview,
       poster: formState.poster,
       backdrop: formState.backdrop,

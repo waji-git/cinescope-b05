@@ -150,11 +150,10 @@ switch (status) {
                     <DropdownMenuLabel>Movie Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                       onClick={() => {
-                setSelectedMovie(movie);
-                // setShowViewDialog(true);
-                    }}
-
+                      onClick={() => {
+                        setSelectedMovie(movie);
+                        // setShowViewDialog(true);
+                      }}
                     >
                       View Details
                     </DropdownMenuItem>
@@ -185,20 +184,23 @@ switch (status) {
         </TableBody>
       </Table>
 
-
-
-      <UpdateMovieDialog
-        open={showUpdateDialog}
-        onOpenChange={setShowUpdateDialog}
-        movie={selectedMovie}
-      />
-      <DeleteMovieDialog
-        open={showDeleteDialog}
-        onOpenChange={setShowDeleteDialog}
-        onConfirmDelete={handleDeleteMovie}
-        isLoading={isloading}
-        movie={selectedMovie}
-      />
+      {/* Only render when selectedMovie is not null */}
+      {selectedMovie && (
+        <>
+          <UpdateMovieDialog
+            open={showUpdateDialog}
+            onOpenChange={setShowUpdateDialog}
+            movie={selectedMovie}
+          />
+          <DeleteMovieDialog
+            open={showDeleteDialog}
+            onOpenChange={setShowDeleteDialog}
+            onConfirmDelete={handleDeleteMovie}
+            isLoading={isloading}
+            movie={selectedMovie}
+          />
+        </>
+      )}
     </div>
   );
 }

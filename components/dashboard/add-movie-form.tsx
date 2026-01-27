@@ -40,16 +40,18 @@ type AddMovieFormProps ={
      // console.log(data);
 
      const movie = {
-       title: formData.get("title"),
-       year: formData.get("year"),
-       directors: [formData.get("director")],
-       genres: [formData.get("genre")],
-       imdb: { rating: Number(formData.get("rating")) },
-       runtime: formData.get("runtime"),
-       plot: formData.get("overview"),
-       poster: formData.get("poster"),
-       backdrop: formData.get("backdrop"),
-       status: formData.get("status"),
+       title: formData.get("title") as string,
+       year: formData.get("year") as string,
+       directors: [formData.get("director") as string],
+       genres: [formData.get("genre") as string],
+       imdb: {
+         rating: Number(formData.get("rating")) || 0,
+       },
+       runtime: formData.get("runtime") as string,
+       plot: formData.get("overview") as string,
+       poster: formData.get("poster") as string,
+       backdrop: formData.get("backdrop") as string,
+       status: formData.get("status") as string,
        lastUpdated: new Date().toISOString(),
      };
 
