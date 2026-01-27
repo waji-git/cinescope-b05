@@ -75,12 +75,14 @@ export default function UpdateMovieForm({
       directors: [formState.director],
       genres: [formState.genres],
       imdb: { rating: Number(formState.rating) },
-      runtime: Number(formState.runtime), // Or .toString() if your action requires it
+      runtime: formState.runtime.toString(), // Ensure it's a string as required by MovieCreate
       plot: formState.overview,
       poster: formState.poster,
       backdrop: formState.backdrop,
       status: formState.status,
       lastUpdated: new Date().toISOString(),
+
+
     };
 
     setIsSubmitting(true);
