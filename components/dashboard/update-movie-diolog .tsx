@@ -13,26 +13,13 @@ import {
 } from "@/components/ui/dialog";
 
 import UpdateMovieForm from "./update-movie-form ";
+import type { Movie } from "@/app/dashboard/movies/type";
 
 type UpdateMovieDialogProps = {
   open: boolean;
-  onOpenChange:(open:boolean)=>void;
-  movie?: WithId<Document>;
+  onOpenChange: (open: boolean) => void;
+  movie?: Movie | null; // ✅
 };
-// type DeleteMovieDialogProps = {
-//   open: boolean;
-//   onOpenChange: (open: boolean) => void;
-//   movie: Movie | null;
-//   onConfirmDelete: (id: string) => void;
-//   isLoading: boolean;
-// };
-
-
-// type UpdateMovieDialogProps = {
-//   open: boolean;
-//   onOpenChange: (open: boolean) => void;
-//   movie: Movie | null;
-// };
 
 export default function UpdateMovieDialog(
   {open,onOpenChange,movie}:UpdateMovieDialogProps)

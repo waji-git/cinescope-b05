@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/dialog";
 // import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label"; 
- import type { WithId, Document } from "mongodb";
+//  import type { WithId, Document } from "mongodb";
+import type { Movie } from "@/app/dashboard/movies/type";
 
-
-type DeleteMovieDialogProps={
-open:boolean;
-onOpenChange?:(open:boolean) =>void;
-movie:WithId<Document>;
-isLoading?:boolean;
-onConfirmDelete?: (id:string) => Promise<void>;
+export type DeleteMovieDialogProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onConfirmDelete: (id: string) => void;
+  isLoading: boolean;
+  movie?: Movie | null; // ✅ allow null/undefined
 };
 
 
@@ -57,8 +57,11 @@ export function DeleteMovieDialog({
           </DialogClose>
           <Button
             variant="destructive"
-            onClick={() => onConfirmDelete(movie?.id)}
-            disabled={isLoading}
+            disabled={isLoading || !movie}
+            onClick={() => {
+              if (!movie) return;
+              onConfirmDelete(movie.id);
+            }}
           >
             Delete
           </Button>

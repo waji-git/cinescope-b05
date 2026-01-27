@@ -17,11 +17,12 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { getAllGenres, getAllStatuses, getAllYears } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { updateMovie } from "@/actions/movies";
-import type { WithId, Document } from "mongodb";
+// import type { WithId, Document } from "mongodb";
+import type { Movie } from "@/app/dashboard/movies/type";
 
 type AddMovieFormProps = {
   showDialog: (value: boolean) => void;
-  movie?: WithId<Document>;
+  movie?: Movie | null; // ✅ FIX
 };
 
 export default function UpdateMovieForm({
