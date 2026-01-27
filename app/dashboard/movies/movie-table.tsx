@@ -27,7 +27,7 @@ import {
 
 import type { Movie } from "./type";
 
-import UpdateMovieDialog from "@/components/dashboard/update-movie-diolog ";
+import UpdateMovieDialog from "@/components/dashboard/update-movie-dialog";
 import { DeleteMovieDialog } from "@/components/dashboard/delete-movie-dailog";
 import { deleteMovie } from "@/actions/movies";
 import { useRouter } from "next/navigation";

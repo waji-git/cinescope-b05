@@ -12,7 +12,7 @@ import {
 
 } from "@/components/ui/dialog";
 
-import UpdateMovieForm from "./update-movie-form ";
+import UpdateMovieForm from "./update-movie-form";
 import type { Movie } from "@/app/dashboard/movies/type";
 
 type UpdateMovieDialogProps = {
