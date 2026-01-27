@@ -24,30 +24,27 @@ type AddMovieFormProps = {
   movie?: WithId<Document>;
 };
 
-
 export default function UpdateMovieForm({
   showDialog,
   movie,
 }: AddMovieFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Ensure movie properties are safely accessed
   const [formState, setFormState] = useState({
-    //  _id:movie?._id.toString() || "",
     title: movie?.title || "",
     year: movie?.year || "",
-    rating: movie?.imdb?.rating || "",
-    genres: movie?.genres?.at(0) || "",
+    rating: movie?.imdb?.rating?.toString() || "",
+    genres: movie?.genres?.[0] || "",
     poster: movie?.poster || "",
     backdrop: movie?.backdrop || "",
-    runtime: movie?.runtime || "",
+    runtime: movie?.runtime?.toString() || "",
     status: movie?.status || "",
-    //  directors: movie?.directors?.at(0) || "",
     director: movie?.director?.[0] || "",
     overview: movie?.plot || "",
   });
 
-
- 
   const years = getAllYears();
   const genres = getAllGenres();
   const statuses = getAllStatuses();
@@ -64,25 +61,17 @@ export default function UpdateMovieForm({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const formData = new FormData(event.currentTarget);
-    // const movieDoc = {
-    //   title: formData.get("title"),
-    //   year: formData.get("year"),
-    //   director: [formData.get("director")],
-    //   genres: [formData.get("genre")],
-    //   imdb: { rating: Number(formData.get("rating")) },
-    //   runtime: formData.get("runtime"),
-    //   plot: formData.get("overview"),
-    //   poster: formData.get("poster"),
-    //   backdrop: formData.get("backdrop"),
-    //   status: formData.get("status"),
-    //   lastUpdated: new Date().toISOString(),
-    // };
+
+    // Ensure movie is defined before proceeding
+    if (!movie) {
+      console.error("Movie is undefined");
+      return;
+    }
 
     const movieDoc = {
       title: formState.title,
       year: formState.year,
-      director: [formState.director],
+      directors: [formState.director], // Updated here
       genres: [formState.genres],
       imdb: { rating: Number(formState.rating) },
       runtime: Number(formState.runtime),
@@ -92,21 +81,19 @@ export default function UpdateMovieForm({
       status: formState.status,
       lastUpdated: new Date().toISOString(),
     };
+
     setIsSubmitting(true);
 
     try {
-      const response = await updateMovie(movie.id, movieDoc);;
-      // // updateMovie(movie.id, movieDoc);
-      // // 
-      // //  const handleSubmit = async (e: React.FormEvent) => {
+      const response = await updateMovie(movie.id, movieDoc);
 
       if (response.success) {
         router.refresh();
         setIsSubmitting(false);
         showDialog(false);
       }
-    } catch {
-      console.log("erorr vreating movie");
+    } catch (error) {
+      console.error("Error updating movie:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -322,5 +309,3 @@ export default function UpdateMovieForm({
     </form>
   );
 }
-
-
