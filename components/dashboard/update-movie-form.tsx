@@ -101,6 +101,59 @@ export default function UpdateMovieForm({
   //     setIsSubmitting(false);
   //   }
   // };
+// const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//   event.preventDefault();
+
+//   if (!movie) {
+//     console.error("Movie is undefined");
+//     return;
+//   }
+// }
+//   const formData = new FormData();
+
+//   formData.append("title", formState.title);
+//   formData.append("year", formState.year);
+//   formData.append("directors", formState.director);
+//   formData.append("genres", formState.genres);
+//   formData.append("rating", formState.rating);
+//   formData.append("runtime", formState.runtime);
+//   formData.append("plot", formState.overview);
+//   formData.append("poster", formState.poster);
+//   formData.append("backdrop", formState.backdrop);
+//   formData.append("status", formState.status);
+//   formData.append("lastUpdated", new Date().toISOString());
+
+//   setIsSubmitting(true);
+
+//   try {
+//     const response = await updateMovie(movie.id, formData);
+
+//     if (response.success) {
+//       router.refresh();
+//       showDialog(false);
+//     }
+
+//     // const movieDoc = {
+//     //   title: formState.title,
+//     //   year: formState.year.toString(), // Ensure it's a string
+//     //   directors: [formState.director],
+//     //   genres: [formState.genres],
+//     //   imdb: { rating: Number(formState.rating) },
+//     //   runtime: formState.runtime.toString(), // Ensure it's a string as required by MovieCreate
+//     //   plot: formState.overview,
+//     //   poster: formState.poster,
+//     //   backdrop: formState.backdrop,
+//     //   status: formState.status,
+//     //   lastUpdated: new Date().toISOString(),
+//     // };
+
+//     setIsSubmitting(true);
+//   } catch (error) {
+//     console.error("Error updating movie:", error);
+//   } finally {
+//     setIsSubmitting(false);
+//   }
+
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 
@@ -110,7 +163,6 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   }
 
   const formData = new FormData();
-
   formData.append("title", formState.title);
   formData.append("year", formState.year);
   formData.append("directors", formState.director);
@@ -132,48 +184,13 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       router.refresh();
       showDialog(false);
     }
-<<<<<<< HEAD
   } catch (error) {
     console.error("Error updating movie:", error);
   } finally {
     setIsSubmitting(false);
   }
 };
-=======
 
-    const movieDoc = {
-      title: formState.title,
-      year: formState.year.toString(), // Ensure it's a string
-      directors: [formState.director],
-      genres: [formState.genres],
-      imdb: { rating: Number(formState.rating) },
-      runtime: formState.runtime.toString(), // Ensure it's a string as required by MovieCreate
-      plot: formState.overview,
-      poster: formState.poster,
-      backdrop: formState.backdrop,
-      status: formState.status,
-      lastUpdated: new Date().toISOString(),
-
-
-    };
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await updateMovie(movie.id, movieDoc);
-
-      if (response.success) {
-        router.refresh();
-        setIsSubmitting(false);
-        showDialog(false);
-      }
-    } catch (error) {
-      console.error("Error updating movie:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
->>>>>>> 2315fe0d4c3bee6b7d736c8c2a73681aa4100664
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
