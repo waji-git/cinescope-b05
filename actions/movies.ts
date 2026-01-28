@@ -91,8 +91,56 @@ export async function createMovie(movie:MovieCreate) {
   }
 }
 
-export async function updateMovie(id:string, movie: MovieCreate) {
+//  export async function updateMovie(id:string, movie: MovieCreate) {
+
+//   try {
+//     const result = await db
+//       .collection("movies_new")
+//       .updateOne(
+//         { _id: ObjectId.createFromHexString(id) },
+//         { $set: movie },
+//         { upsert: false }
+//       );
+
+//     if (result.acknowledged) {
+//       return {
+//         success: true,
+//         message: "Movie updatedsuccessfully.",
+//       };
+//     } else {
+//       return {
+//         success: false,
+//         message: "Failed to updatemovie.",
+//       };
+//     }
+//   } catch (error) {
+//     console.log("MongoDB insert error:", error);
+//     return {
+//       success: false,
+//       message: "An error occurred while creating the movie.",
+//     };
+//   }
+// }
+
+
+export async function updateMovie(id: string, formData: FormData) {
   try {
+    const movie: MovieCreate = {
+      title: formData.get("title") as string,
+      year: formData.get("year") as string,
+      directors: [formData.get("directors") as string],
+      genres: [formData.get("genres") as string],
+      imdb: {
+        rating: Number(formData.get("rating")),
+      },
+      runtime: formData.get("runtime") || "",
+      plot: formData.get("plot") as string,
+      poster: formData.get("poster") as string,
+      backdrop: formData.get("backdrop") as string,
+      status: formData.get("status") as string,
+      lastUpdated: formData.get("lastUpdated") as string,
+    };
+
     const result = await db
       .collection("movies_new")
       .updateOne(
@@ -104,22 +152,23 @@ export async function updateMovie(id:string, movie: MovieCreate) {
     if (result.acknowledged) {
       return {
         success: true,
-        message: "Movie updatedsuccessfully.",
+        message: "Movie updated successfully.",
       };
     } else {
       return {
         success: false,
-        message: "Failed to updatemovie.",
+        message: "Failed to update movie.",
       };
     }
   } catch (error) {
-    console.log("MongoDB insert error:", error);
+    console.log("MongoDB update error:", error);
     return {
       success: false,
-      message: "An error occurred while creating the movie.",
+      message: "An error occurred while updating the movie.",
     };
   }
 }
+
 
 export async function deleteMovie(id: string) {
   try {
