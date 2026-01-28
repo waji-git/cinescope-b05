@@ -132,12 +132,48 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       router.refresh();
       showDialog(false);
     }
+<<<<<<< HEAD
   } catch (error) {
     console.error("Error updating movie:", error);
   } finally {
     setIsSubmitting(false);
   }
 };
+=======
+
+    const movieDoc = {
+      title: formState.title,
+      year: formState.year.toString(), // Ensure it's a string
+      directors: [formState.director],
+      genres: [formState.genres],
+      imdb: { rating: Number(formState.rating) },
+      runtime: formState.runtime.toString(), // Ensure it's a string as required by MovieCreate
+      plot: formState.overview,
+      poster: formState.poster,
+      backdrop: formState.backdrop,
+      status: formState.status,
+      lastUpdated: new Date().toISOString(),
+
+
+    };
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await updateMovie(movie.id, movieDoc);
+
+      if (response.success) {
+        router.refresh();
+        setIsSubmitting(false);
+        showDialog(false);
+      }
+    } catch (error) {
+      console.error("Error updating movie:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+>>>>>>> 2315fe0d4c3bee6b7d736c8c2a73681aa4100664
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
