@@ -9,13 +9,8 @@ import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { Movie } from "@/lib/type";
 type MovieCardProps = {
-  
-
-    movie:Movie;
-  
-};
-
-
+      movie:Movie;
+  };
 
 export default function MovieCard({ movie }: MovieCardProps) {
   const[posterUrl, setPosterUrl] = useState(movie.poster);

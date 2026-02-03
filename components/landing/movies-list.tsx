@@ -1,7 +1,7 @@
 import { getMovies } from "@/actions/movies";
 import MovieCard, { MoviesCardSkelton } from "./movie-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Movie } from "@/lib/type";
+
 
 export default async function MoviesList() {
   await new Promise((resolve) => setTimeout(resolve, 5000));

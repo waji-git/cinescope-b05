@@ -6,9 +6,10 @@ export default function HeroBanner() {
     <section
       id="heroBanner"
       className="min-h-[100vh] w-full text-center py-16 bg-cover bg-center"
-      style={{ backgroundImage: "url('/hero.png')" }}
+      style={{ backgroundImage: "url('Hero.png')" }}
     >
       heroBanner
     </section>
   );
 }
+

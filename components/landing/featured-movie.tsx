@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-// import { Button } from "../ui/button";
 import { Button } from "@/components/ui/button";
 import MoviesList, { MoviesListSkelton } from "./movies-list";
 

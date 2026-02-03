@@ -18,8 +18,6 @@ import {
  import { Button } from "@/components/ui/button";
   import { createMovie } from "@/actions/movies";
 
-//  import { movie } from "@/lib/type";
-
 
 type AddMovieFormProps ={
  showDialog: (value: boolean)=> void;
