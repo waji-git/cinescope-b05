@@ -3,10 +3,10 @@
 import { db } from "@/db";
 import { MovieCreate} from "@/lib/type";
 import { ObjectId } from "mongodb";
+import { Movie } from "@/lib/type";
 
 
-
-export async function getMovies() {
+export async function getMovies(): Promise<Movie[]> {
   try {
     const moviesResponse = await fetch(
       `${process.env.API_BASE_URL}/v1/movies`,
@@ -90,37 +90,6 @@ export async function createMovie(movie:MovieCreate) {
     };
   }
 }
-
-//  export async function updateMovie(id:string, movie: MovieCreate) {
-
-//   try {
-//     const result = await db
-//       .collection("movies_new")
-//       .updateOne(
-//         { _id: ObjectId.createFromHexString(id) },
-//         { $set: movie },
-//         { upsert: false }
-//       );
-
-//     if (result.acknowledged) {
-//       return {
-//         success: true,
-//         message: "Movie updatedsuccessfully.",
-//       };
-//     } else {
-//       return {
-//         success: false,
-//         message: "Failed to updatemovie.",
-//       };
-//     }
-//   } catch (error) {
-//     console.log("MongoDB insert error:", error);
-//     return {
-//       success: false,
-//       message: "An error occurred while creating the movie.",
-//     };
-//   }
-// }
 
 
 export async function updateMovie(id: string, formData: FormData) {

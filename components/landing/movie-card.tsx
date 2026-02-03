@@ -7,21 +7,15 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
-
+import { Movie } from "@/lib/type";
 type MovieCardProps = {
-  movie: {
-    _id: string;
-    title: string;
-    runtime: number;
-    genres: string[];
-    year: number;
-    imdb: {
-      rating: number;
-      votes: number;
-    };
-    poster: string;
-  };
+  
+
+    movie:Movie;
+  
 };
+
+
 
 export default function MovieCard({ movie }: MovieCardProps) {
   const[posterUrl, setPosterUrl] = useState(movie.poster);
