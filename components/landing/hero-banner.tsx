@@ -9,7 +9,7 @@ export default function HeroBanner() {
       style={{ backgroundImage: "url('/cine.jpg')" }}
     
     >
-      heroBanner
+      {/* heroBanner */}
     </section>
   );
 }
@@ -18,8 +18,8 @@ export default function HeroBanner() {
 //   return (
 //     <section className="relative min-h-screen w-full">
 //       <Image
-//         src="/cine.png"
-//         alt="Hero"
+//         src="/cine.JPG"
+//         alt="cine"
 //         fill
 //         priority
 //         className="object-cover"
