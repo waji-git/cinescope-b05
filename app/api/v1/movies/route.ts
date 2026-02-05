@@ -27,6 +27,7 @@
 // };
 
 import { NextRequest, NextResponse } from "next/server";
+
 import { db } from "@/db";
 
 export async function GET(request: NextRequest) {
@@ -43,4 +44,5 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
 

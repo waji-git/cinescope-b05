@@ -29,28 +29,21 @@ import { db } from "@/db";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string }> }
 ) {
-  try {
-    const { id } = await params; // ✅ MUST await
+  const { id } = await context.params;
 
-    if (!ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
-    }
-
-    const movie = await db
-      .collection("movies")
-      .findOne({ _id: new ObjectId(id) });
-
-    if (!movie) {
-      return NextResponse.json({ error: "Movie not found" }, { status: 404 });
-    }
-
-    return NextResponse.json(movie);
-  } catch (err) {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+  if (!ObjectId.isValid(id)) {
+    return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
   }
+
+  const movie = await db
+    .collection("movies")
+    .findOne({ _id: new ObjectId(id) });
+
+  if (!movie) {
+    return NextResponse.json({ error: "Movie not found" }, { status: 404 });
+  }
+
+  return NextResponse.json(movie);
 }
