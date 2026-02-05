@@ -32,7 +32,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params; // 👈 IMPORTANT
+    const { id } = await params; // ✅ MUST await
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
@@ -47,7 +47,10 @@ export async function GET(
     }
 
     return NextResponse.json(movie);
-  } catch (error) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
