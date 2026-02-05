@@ -9,7 +9,7 @@ export default function HeroBanner() {
       style={{ backgroundImage: "url('/cine.jpg')" }}
     
     >
-      {/* heroBanner */}
+      heroBanner
     </section>
   );
 }
