@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-
+import { Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { Movie } from "@/lib/type";
+import Link from "next/link";
+
 type MovieCardProps = {
       movie:Movie;
   };
@@ -56,17 +58,23 @@ export default function MovieCard({ movie }: MovieCardProps) {
       </CardContent>
       <CardFooter className="justify-between p-4 pt-0">
         <div className="flex items-center">
+          {/* <span>⭐</span> */}
+          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
           <span className="text-primary text-sm font-medium">
             {movie.imdb.rating}/10
           </span>
         </div>
-        <Button variant="ghost" size="sm" className="hour:text-primary">
-          details
-        </Button>
+        <Link href={`/movies/${movie._id}`}>
+          <Button variant="ghost" size="sm" className="hour:text-primary">
+            details
+          </Button>
+        </Link>
+      
       </CardFooter>
     </Card>
   );
 }
+
 
 export function MoviesCardSkelton(){
 return(

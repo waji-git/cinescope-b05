@@ -14,4 +14,4 @@ export default function MoviesPage() {
    </div>
   );
 }
-// h-96 bg-purple-400 flex flex-col justify-center items-center gap-4 flex-12
+

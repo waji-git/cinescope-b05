@@ -9,24 +9,7 @@ export default function HeroBanner() {
       style={{ backgroundImage: "url('/cine.jpg')" }}
     
     >
-      heroBanner
+     
     </section>
   );
 }
-// import Image from "next/image";
-// export default function HeroBanner() {
-//   return (
-//     <section className="relative min-h-screen w-full">
-//       <Image
-//         src="/cine.JPG"
-//         alt="cine"
-//         fill
-//         priority
-//         className="object-cover"
-//       />
-//       <div className="relative z-10 text-white text-center py-16">
-//         heroBanner
-//       </div>
-//     </section>
-//   );
-// }
