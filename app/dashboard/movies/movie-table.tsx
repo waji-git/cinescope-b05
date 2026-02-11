@@ -40,8 +40,7 @@ type MovieTableProps = {
 
 export function MovieTable({ movies }: MovieTableProps) {
   const router = useRouter();
-  // const [showViewDialog, setShowViewDialog] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [showUpdateDialog, setShowUpdateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isloading, setIsLoading] = useState(false);

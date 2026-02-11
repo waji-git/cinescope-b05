@@ -29,7 +29,7 @@ export default async function MovieData({query=""} : MovieDataProps) {
       imdb: movie.imdb,
       runtime: movie.runtime,
       status: movie.status ?? "published",
-       director: movie.director ?? movie.directors?.[0],
+       directors: movie.directors,
     }));
 
     return <MovieTable movies={refinedData} />;

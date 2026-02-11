@@ -14,7 +14,7 @@ export async function getMovies(): Promise<Movie[]> {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${process.env.API_KEY}`,
+          
         },
         cache: "no-store",
       }
@@ -40,7 +40,7 @@ export async function searchMovies(query: string) {
   try {
     const movies = await db
       .collection("movies_new")
-      .find({ title: { $regex: query, $options: "i" } }) // Case-insensitive search
+      .find({ title: { $regex: query, $options: "i" } }) 
       .limit(50)
       .toArray();
 

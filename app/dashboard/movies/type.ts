@@ -9,7 +9,7 @@ export type Movie = {
    backdrop:string;
   status: string;
   poster: string;
-  director:string;
+  directors:string;
   imdb: {
     id: string;
     rating: number;

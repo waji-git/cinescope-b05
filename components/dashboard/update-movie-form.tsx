@@ -42,7 +42,7 @@ export default function UpdateMovieForm({
     backdrop: movie?.backdrop || "",
     runtime: movie?.runtime?.toString() || "",
     status: movie?.status || "",
-    director: movie?.director?.[0] || "",
+    director: movie?.directors?.[0] || "",
     overview: movie?.plot || "",
   });
 
