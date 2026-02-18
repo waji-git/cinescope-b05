@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
@@ -148,13 +149,16 @@ switch (status) {
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Movie Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem
+                    <DropdownMenuItem asChild
                       onClick={() => {
                         setSelectedMovie(movie);
-                        // setShowViewDialog(true);
+                        router.push(`/movies/${movie.id}`);
                       }}
                     >
-                      View Details
+                      <Link href={`/movies/${movie.id}`}>
+                    
+                        View Details
+                      </Link>
                     </DropdownMenuItem>
 
                     <DropdownMenuItem

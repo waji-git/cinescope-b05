@@ -3,7 +3,7 @@
 import React from "react";
 import MovieSelectors from "./movie-selectors";
 import MovieData from "./movie-data";
-import AddMovieDiolog from "@/components/dashboard/add-movie-diolog";
+import AddMovieDiolog from "@/components/dashboard/add-movie-dialog";
 
 type MoviesDashboardPageProps = {
   searchParams: {
